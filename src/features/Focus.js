@@ -1,21 +1,32 @@
 import React from 'react'
-import { TextInput, View, StyleSheet, Text } from 'react-native'
+import { TextInput, View, StyleSheet, Text, SafeAreaView } from 'react-native'
 import Button from '../components/Button';
 import { colors } from '../utils/colors';
 
 export const Focus = () => {
     return (
         <View style={styles.container}>
-            <TextInput style={styles.input} />
-            <Button title={"Focus"} />
-        </View>
+            <SafeAreaView style={styles.headerContainer}>
+                <TextInput style={styles.input} />
+                <Button title={"Focus"} />
+            </SafeAreaView>
+            <SafeAreaView style={styles.bodyContainer}>
+                <Text>List</Text>
+            </SafeAreaView>
+        </View >
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 0.8,
-        flexDirection: 'row'
+        flex: 1,
+        alignSelf: 'stretch'
+    },
+    headerContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     input: {
         height: 40,
@@ -26,6 +37,10 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         marginRight: 20
     },
+    bodyContainer: {
+        flex: 2,
+        backgroundColor: colors.white,
+    }
 });
 
 

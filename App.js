@@ -5,12 +5,10 @@ import { colors } from './src/utils/colors';
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      <View>
-        <Focus />
-        <StatusBar style="light" />
-      </View>
-    </SafeAreaView>
+    <View style={styles.container}>
+      <Focus />
+      <StatusBar style="light" />
+    </View>
   );
 }
 
