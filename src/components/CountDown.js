@@ -6,10 +6,12 @@ const formatTime = (time) => {
     return time < 10 ? `0${time}` : time
 }
 
-const CountDown = () => {
+const CountDown = ({ trackTime, isPaused }) => {
 
-    const [number, setNumber] = useState(10)
+    const [number, setNumber] = useState(0)
     let interval = useRef(null)
+
+
 
     const decreaseNumber = () => {
         setNumber((prev) => {
@@ -21,14 +23,23 @@ const CountDown = () => {
     }
 
     useEffect(() => {
+        setNumber(() => {
+            return !trackTime ? 0 : trackTime
+        })
+    }, [trackTime])
+
+    useEffect(() => {
+        if (!isPaused) {
+            clearInterval(interval.current)
+            return
+        }
         interval.current = setInterval(decreaseNumber, 1000)
         return () => clearInterval(interval.current);
-    }, [])
+    }, [isPaused])
 
     const minutes = Math.floor(number / 60) % 60
     const seconds = number % 60
 
-    console.log(seconds)
     return (
         <Text style={styles.text}>{formatTime(minutes)} : {formatTime(seconds)}</Text>
     )
@@ -36,7 +47,9 @@ const CountDown = () => {
 
 const styles = StyleSheet.create({
     text: {
-        color: colors.white
+        color: colors.white,
+        fontSize: 50,
+        fontWeight: '700'
     }
 })
 
