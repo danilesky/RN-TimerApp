@@ -2,9 +2,13 @@ import React, { useCallback, useEffect, useMemo, useReducer, useRef, useState } 
 import { StyleSheet, Text } from 'react-native'
 import { colors } from '../utils/colors'
 
+const formatTime = (time) => {
+    return time < 10 ? `0${time}` : time
+}
+
 const CountDown = () => {
 
-    const [number, setNumber] = useState(130)
+    const [number, setNumber] = useState(138)
     let interval = useRef(null)
 
     const decreaseNumber = () => {
@@ -21,7 +25,7 @@ const CountDown = () => {
 
     console.log(seconds)
     return (
-        <Text style={styles.text}>{minutes} {seconds}</Text>
+        <Text style={styles.text}>{formatTime(minutes)} {formatTime(seconds)}</Text>
     )
 }
 
