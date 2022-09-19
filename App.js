@@ -12,7 +12,7 @@ export default function App() {
       {!isFocused ?
         <Focus setFocus={setFocused} />
         :
-        <Timer />
+        <Timer setFocus={setFocused} />
       }
       <StatusBar style="light" />
     </View>

@@ -12,7 +12,7 @@ const progressCalc = (timeSpent, timeTotal) => {
     return 0
 }
 
-function Timer() {
+function Timer({ setFocus }) {
     const [isPaused, setPaused] = useState(false)
     const [progress, setProgress] = useState(null)
     const [focusTime, setFocusTime] = useState(null)
@@ -35,6 +35,7 @@ function Timer() {
                 <Button title={'+20min'} onPress={() => focusTimeHandler(20)} buttonStyle={styles.buttonAddEnd} textStyle={styles.buttonAddText} />
             </View>
             <Button title={isPaused ? "Pause" : "Start"} onPress={() => setPaused((prev) => !prev)} buttonStyle={styles.button} />
+            <Button title={'Back'} onPress={() => setFocus((focus) => !focus)} buttonStyle={styles.backButton} textStyle={styles.backButtonText} />
         </View>
     )
 }
@@ -72,6 +73,15 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
     buttonAddText: {
+        color: colors.white
+    },
+    backButton: {
+        marginTop: 350,
+        backgroundColor: colors.lightBlue,
+        height: 50,
+        width: 250,
+    },
+    backButtonText: {
         color: colors.white
     }
 
