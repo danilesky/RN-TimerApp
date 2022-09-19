@@ -30,9 +30,9 @@ function Timer() {
                 onProgress={setProgress}
             />
             <View style={styles.timeAdd}>
-                <Button title={'+5min'} onPress={() => focusTimeHandler(5)} buttonStyle={styles.buttonAdd} textStyle={styles.buttonAddText} />
-                <Button title={'+10min'} onPress={() => focusTimeHandler(10)} buttonStyle={styles.buttonAdd} textStyle={styles.buttonAddText} />
-                <Button title={'+20min'} onPress={() => focusTimeHandler(20)} buttonStyle={styles.buttonAdd} textStyle={styles.buttonAddText} />
+                <Button title={'+5min'} onPress={() => focusTimeHandler(5)} buttonStyle={styles.buttonAddStart} textStyle={styles.buttonAddText} />
+                <Button title={'+10min'} onPress={() => focusTimeHandler(10)} buttonStyle={styles.buttonAddMiddle} textStyle={styles.buttonAddText} />
+                <Button title={'+20min'} onPress={() => focusTimeHandler(20)} buttonStyle={styles.buttonAddEnd} textStyle={styles.buttonAddText} />
             </View>
             <Button title={isPaused ? "Pause" : "Start"} onPress={() => setPaused((prev) => !prev)} buttonStyle={styles.button} />
         </View>
@@ -54,13 +54,28 @@ const styles = StyleSheet.create({
     timeAdd: {
         flexDirection: 'row'
     },
-    buttonAdd: {
+    buttonAddStart: {
+        borderTopRightRadius: 0,
+        borderBottomRightRadius: 0,
+        backgroundColor: colors.blue,
+        marginTop: 10
+    },
+    buttonAddMiddle: {
+        borderRadius: 0,
+        backgroundColor: colors.blue,
+        marginTop: 10
+    },
+    buttonAddEnd: {
+        borderTopLeftRadius: 0,
+        borderBottomLeftRadius: 0,
         backgroundColor: colors.blue,
         marginTop: 10
     },
     buttonAddText: {
         color: colors.white
     }
+
+
 })
 
 export default Timer
