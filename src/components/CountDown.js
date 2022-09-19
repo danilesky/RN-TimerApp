@@ -6,7 +6,7 @@ const formatTime = (time) => {
     return time < 10 ? `0${time}` : time
 }
 
-const CountDown = ({ trackTime, isPaused }) => {
+const CountDown = ({ trackTime, isPaused, onProgress }) => {
 
     const [number, setNumber] = useState(0)
     let interval = useRef(null)
@@ -20,6 +20,7 @@ const CountDown = ({ trackTime, isPaused }) => {
             }
             return prev - 1
         })
+        onProgress(number)
     }
 
     useEffect(() => {
@@ -34,8 +35,12 @@ const CountDown = ({ trackTime, isPaused }) => {
             return
         }
         interval.current = setInterval(decreaseNumber, 1000)
-        return () => clearInterval(interval.current);
+        return () => { clearInterval(interval.current) };
     }, [isPaused])
+
+    useEffect(() => {
+        onProgress(number)
+    }, [number])
 
     const minutes = Math.floor(number / 60) % 60
     const seconds = number % 60
