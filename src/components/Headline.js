@@ -4,17 +4,17 @@ import { colors } from '../utils/colors'
 
 const Headline = ({ ...props }) => {
     return (
-        <Text style={[styles(props.theme).text, props.customStyle]}>
+        <Text style={[styles(props).text, props.customStyle]}>
             {props.title}
         </Text >
     )
 }
 
-const styles = (theme) => StyleSheet.create({
+const styles = (props) => StyleSheet.create({
     text: {
-        color: theme === 'dark' ? colors.darkBlue : colors.white,
+        color: props.theme === 'dark' ? colors.darkBlue : colors.white,
         fontWeight: '700',
-        fontSize: 55,
+        fontSize: !props.size ? 55 : props.size,
         justifySelf: 'center',
         alignSelf: 'center',
         marginTop: 20,
