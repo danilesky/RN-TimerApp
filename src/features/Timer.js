@@ -1,9 +1,10 @@
 import React from 'react'
 import { StyleSheet, Text } from 'react-native'
+import CountDown from '../components/CountDown'
 
 function Timer() {
     return (
-        <Text>This is timer page</Text>
+        <CountDown />
     )
 }
 
