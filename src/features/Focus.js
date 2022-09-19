@@ -32,27 +32,23 @@ const DATA = [
 ];
 
 
-export const Focus = ({ setFocus }) => {
+export const Focus = ({ setFocus, setActivity }) => {
+    const [text, setText] = useState(null)
     return (
         <View style={styles.container}>
             <SafeAreaView style={styles.headerContainer}>
                 <Headline theme={'light'} title={'Focus on ...'} size={40} />
                 <View style={styles.headerWrapper}>
-                    <TextInput style={styles.input} />
-                    <Button title={"Focus"} onPress={() => setFocus(true)} />
+                    <TextInput style={styles.input} onChangeText={setText} />
+                    <Button title={"Focus"} onPress={() => {
+                        setActivity(text)
+                        setFocus(true)
+                    }} />
                 </View>
             </SafeAreaView>
             <SafeAreaView style={styles.bodyContainer}>
                 <Headline theme={'dark'} title={'My focus list'} size={30} />
-                <View style={styles.listWrapper}>
-                    <FlatList
-                        data={DATA}
-                        renderItem={({ item }) => (
-                            <Text style={styles.title}>{item.title}</Text>
-                        )}
-                        keyExtractor={item => item.id}
-                    />
-                </View>
+
             </SafeAreaView>
         </View >
     )

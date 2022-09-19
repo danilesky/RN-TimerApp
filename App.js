@@ -7,12 +7,16 @@ import { colors } from './src/utils/colors';
 
 export default function App() {
   const [isFocused, setFocused] = useState(false)
+  const [focusStore, setFocusStore] = useState([])
+  const [currentActivity, setCurrentActivity] = useState(null)
+
+  console.log(focusStore)
   return (
     <View style={styles.container}>
       {!isFocused ?
-        <Focus setFocus={setFocused} />
+        <Focus setFocus={setFocused} setActivity={setCurrentActivity} />
         :
-        <Timer setFocus={setFocused} />
+        <Timer setFocus={setFocused} setFocusStore={setFocusStore} activity={currentActivity} />
       }
       <StatusBar style="light" />
     </View>

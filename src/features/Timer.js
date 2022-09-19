@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import { ProgressBar } from 'react-native-paper'
 import Button from '../components/Button'
 import CountDown from '../components/CountDown'
+import Headline from '../components/Headline'
 import { colors } from '../utils/colors'
 
 const progressCalc = (timeSpent, timeTotal) => {
@@ -12,7 +13,7 @@ const progressCalc = (timeSpent, timeTotal) => {
     return 0
 }
 
-function Timer({ setFocus }) {
+function Timer({ setFocus, setFocusStore, activity }) {
     const [isPaused, setPaused] = useState(false)
     const [progress, setProgress] = useState(null)
     const [focusTime, setFocusTime] = useState(null)
@@ -23,19 +24,40 @@ function Timer({ setFocus }) {
 
     return (
         <View style={styles.container}>
+            <Headline title={activity} />
             <ProgressBar progress={progressCalc(progress, focusTime)} color={colors.grey} style={styles.progressBar} />
             <CountDown
                 trackTime={focusTime}
                 isPaused={isPaused}
                 onProgress={setProgress}
+                onEnd={() => setFocusStore((prev) =>
+                    [...prev,
+                    {
+                        activity: activity,
+                        timeSpent: progress,
+                        timeGoal: focusTime
+                    }]
+                )}
             />
             <View style={styles.timeAdd}>
                 <Button title={'+5min'} onPress={() => focusTimeHandler(5)} buttonStyle={styles.buttonAddStart} textStyle={styles.buttonAddText} />
                 <Button title={'+10min'} onPress={() => focusTimeHandler(10)} buttonStyle={styles.buttonAddMiddle} textStyle={styles.buttonAddText} />
-                <Button title={'+20min'} onPress={() => focusTimeHandler(20)} buttonStyle={styles.buttonAddEnd} textStyle={styles.buttonAddText} />
+                <Button title={'+20min'} onPress={() => focusTimeHandler(20)} buttonStyle={styles.buttonAddEnd} textStyle={styles.buttonAddText}
+                />
             </View>
             <Button title={isPaused ? "Pause" : "Start"} onPress={() => setPaused((prev) => !prev)} buttonStyle={styles.button} />
-            <Button title={'Back'} onPress={() => setFocus((focus) => !focus)} buttonStyle={styles.backButton} textStyle={styles.backButtonText} />
+            <Button title={'End Activity'} onPress={() => {
+                setFocus((focus) => !focus)
+                setFocusStore((prev) =>
+                    [...prev,
+                    {
+                        activity: activity,
+                        timeSpent: progress,
+                        timeGoal: focusTime
+                    }
+                    ])
+            }}
+                buttonStyle={styles.backButton} textStyle={styles.backButtonText} />
         </View>
     )
 }
