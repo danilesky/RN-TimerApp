@@ -8,11 +8,16 @@ const formatTime = (time) => {
 
 const CountDown = () => {
 
-    const [number, setNumber] = useState(138)
+    const [number, setNumber] = useState(10)
     let interval = useRef(null)
 
     const decreaseNumber = () => {
-        setNumber((prev) => prev - 1)
+        setNumber((prev) => {
+            if (prev === 0) {
+                return prev
+            }
+            return prev - 1
+        })
     }
 
     useEffect(() => {
@@ -25,7 +30,7 @@ const CountDown = () => {
 
     console.log(seconds)
     return (
-        <Text style={styles.text}>{formatTime(minutes)} {formatTime(seconds)}</Text>
+        <Text style={styles.text}>{formatTime(minutes)} : {formatTime(seconds)}</Text>
     )
 }
 
