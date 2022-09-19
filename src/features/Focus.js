@@ -32,14 +32,14 @@ const DATA = [
 ];
 
 
-export const Focus = () => {
+export const Focus = ({ setFocus }) => {
     return (
         <View style={styles.container}>
             <SafeAreaView style={styles.headerContainer}>
                 <Headline theme={'light'} title={'Focus on ...'} size={40} />
                 <View style={styles.headerWrapper}>
                     <TextInput style={styles.input} />
-                    <Button title={"Focus"} />
+                    <Button title={"Focus"} onPress={() => setFocus(true)} />
                 </View>
             </SafeAreaView>
             <SafeAreaView style={styles.bodyContainer}>

@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import Focus from './src/features/Focus';
+import Timer from './src/features/Timer';
 import { colors } from './src/utils/colors';
 
 export default function App() {
@@ -9,8 +10,9 @@ export default function App() {
   return (
     <View style={styles.container}>
       {!isFocused ?
-        <Focus />
-        : <Text>You are focusing</Text>
+        <Focus setFocus={setFocused} />
+        :
+        <Timer />
       }
       <StatusBar style="light" />
     </View>
