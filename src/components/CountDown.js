@@ -8,7 +8,7 @@ const formatTime = (time) => {
 
 const CountDown = ({ trackTime, isPaused, onProgress }) => {
 
-    const [number, setNumber] = useState(0)
+    const [number, setNumber] = useState(null)
     let interval = useRef(null)
 
 
