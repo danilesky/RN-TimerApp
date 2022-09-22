@@ -13,7 +13,7 @@ const progressCalc = (timeSpent, timeTotal) => {
     return 0
 }
 
-function Timer({ setFocus, setFocusStore, activity }) {
+function Timer({ setFocus, setFocusStore, activity, setActivities }) {
     const [isPaused, setPaused] = useState(false)
     const [progress, setProgress] = useState(null)
     const [focusTime, setFocusTime] = useState(null)
@@ -29,6 +29,7 @@ function Timer({ setFocus, setFocusStore, activity }) {
             <CountDown
                 trackTime={focusTime}
                 isPaused={isPaused}
+                setPaused={setPaused}
                 onProgress={setProgress}
                 onEnd={() => setFocusStore((prev) =>
                     [...prev,
@@ -48,14 +49,7 @@ function Timer({ setFocus, setFocusStore, activity }) {
             <Button title={isPaused ? "Pause" : "Start"} onPress={() => setPaused((prev) => !prev)} buttonStyle={styles.button} />
             <Button title={'End Activity'} onPress={() => {
                 setFocus((focus) => !focus)
-                setFocusStore((prev) =>
-                    [...prev,
-                    {
-                        activity: activity,
-                        timeSpent: progress,
-                        timeGoal: focusTime
-                    }
-                    ])
+                setActivities((prev) => [...prev, { activity: activity, timeSpent: progress, timeGoal: focusTime }])
             }}
                 buttonStyle={styles.backButton} textStyle={styles.backButtonText} />
         </View>

@@ -6,17 +6,18 @@ const formatTime = (time) => {
     return time < 10 ? `0${time}` : time
 }
 
-const CountDown = ({ trackTime, isPaused, onProgress, onEnd }) => {
+const CountDown = ({ trackTime, isPaused, onProgress, onEnd, setPaused }) => {
 
     const [number, setNumber] = useState(null)
     let interval = useRef(null)
 
-
-
     const decreaseNumber = () => {
         setNumber((prev) => {
             if (prev === 0) {
-                onEnd()
+                setPaused(false)
+                if (!isPaused) {
+                    onEnd()
+                }
                 return prev
             }
             return prev - 1

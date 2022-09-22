@@ -9,14 +9,15 @@ export default function App() {
   const [isFocused, setFocused] = useState(false)
   const [focusStore, setFocusStore] = useState([])
   const [currentActivity, setCurrentActivity] = useState(null)
+  const [activities, setActivities] = useState([])
 
   console.log(focusStore)
   return (
     <View style={styles.container}>
       {!isFocused ?
-        <Focus setFocus={setFocused} setActivity={setCurrentActivity} />
+        <Focus setFocus={setFocused} setActivity={setCurrentActivity} activities={focusStore} />
         :
-        <Timer setFocus={setFocused} setFocusStore={setFocusStore} activity={currentActivity} />
+        <Timer setFocus={setFocused} setFocusStore={setFocusStore} activity={currentActivity} setActivities={setFocusStore} />
       }
       <StatusBar style="light" />
     </View>
